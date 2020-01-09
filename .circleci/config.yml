@@ -26,7 +26,11 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install 
+      - run: npm install
+
+      - run: ng update
+
+      - run: ng build 
 
       - save_cache:
           paths:
@@ -34,5 +38,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm test 
-      - run: ng lint --force=true
+      - run: ng lint --force=true 
