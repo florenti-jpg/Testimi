@@ -26,10 +26,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: sudo npm install -g @angular/cli 
       - run: npm install
-      - run: ng build --prod
-      - run: zip -r testimi.zip dist/testimi
+      - run: npm audit fix --force
+      - run: ng build --prod 
 
       - save_cache:
           paths:
@@ -37,4 +36,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: ng lint --force=true
+      - run: npm test
