@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:latest
+      - image: circleci/node:lst 
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -27,8 +27,7 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-      - run: npm audit fix --force
-      - run: ng build --prod 
+      - run: ng build
 
       - save_cache:
           paths:
@@ -36,4 +35,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
+      - run: ng lint --force=true
       - run: npm test
