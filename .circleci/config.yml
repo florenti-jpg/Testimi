@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:latest
+      - image: circleci/node:lts 
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -26,9 +26,10 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: sudo npm install -g @angular/cli   
-      - run: sudo npm install
-      - run: ng build 
+      - run: Sudo npm i -g @angular/cli 
+      - run: npm i 
+      - run: ng build --prod
+      - run: zip -r testimi.zip dist/testimi/
 
       - save_cache:
           paths:
@@ -36,5 +37,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm test
-      - run: echo Hello Plurasight
+      - run: ng lint --force=true
